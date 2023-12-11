@@ -78,6 +78,8 @@ handleKey=(e)=>{
   
   if (!audio) return
   key.classList.add("playing")  
+  //revised for starting again
+  audio.currentTime = 0
   audio.play()
 }
 

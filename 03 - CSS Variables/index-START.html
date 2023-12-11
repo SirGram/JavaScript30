@@ -43,9 +43,37 @@
     input {
       width: 100px;
     }
+    /* css3 */
+    :root{
+      --spacing: 10px;
+      --blur:10px;
+      --base: #ffc600;
+    }
+    img{
+      background-color: var(--base);
+      filter: blur(var(--blur));
+      padding: var(--spacing);
+    }
+    h2{
+      color: var(--base);
+    }
   </style>
 
   <script>
+
+    const inputs = document.querySelectorAll(".controls input")
+    console.log(inputs)
+
+    //this == e.target ?
+    const handleChange=(e)=>{
+      const suffix = e.target.dataset.sizing || ""
+      console.log(e.target.dataset)
+      document.documentElement.style.setProperty(`--${e.target.name}`, e.target.value + suffix)
+    }
+    
+    inputs.forEach(input => input.addEventListener("change", handleChange))     
+    inputs.forEach(input => input.addEventListener("mousemove", handleChange))
+
   </script>
 
 </body>
