@@ -12,7 +12,7 @@
       <div class="clock-face">
         <div class="hand hour-hand"></div>
         <div class="hand min-hand"></div>
-        <div class="hand second-hand"></div>
+        <div class="hand sec-hand"></div>
       </div>
     </div>
 
@@ -59,16 +59,50 @@
 
     .hand {
       width: 50%;
-      height: 6px;
+      height: 8px;
       background: black;
       position: absolute;
-      top: 50%;
+      top: 50%; 
+      /* adjust rotation*/     
+      transform: rotate(90deg);
+      transform-origin: 100%;
+      transition: all 0.05s;
+      transition-timing-function:ease-in-out;
+    }
+    .sec-hand{
+      background: red;
+      height:4px;
     }
 
   </style>
 
   <script>
+    //get divelements
+    const handHour = document.querySelector(".hour-hand")
+    const handMin = document.querySelector(".min-hand")
+    const handSec = document.querySelector(".sec-hand")
 
+    //initialSystem => 360º
+    const calculateDegrees=(initialValue,maxValue)=>{
+      let percentage=initialValue / maxValue
+      let result = percentage * 360 + 90
+      return result
+    }
+
+    const f = ()=>{
+      let hRot, mRot, sRot
+      const date = new Date()
+      hRot = calculateDegrees( date.getHours(),24)
+      mRot = calculateDegrees( date.getMinutes(),60)
+      sRot = calculateDegrees( date.getSeconds(),60)
+      console.log(hRot,mRot,sRot)
+      handHour.style.transform = `rotate(${hRot}deg)`      
+      handMin.style.transform = `rotate(${mRot}deg)`
+      handSec.style.transform = `rotate(${sRot}deg)`
+
+    }
+    
+    setInterval(f,1000)
 
   </script>
 </body>
